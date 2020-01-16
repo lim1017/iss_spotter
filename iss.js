@@ -6,13 +6,9 @@ const fetchMyIP = function(callback) {
   request(api, (error, response, body) => {
     const data = JSON.parse(body);
     // console.log(data)
+    // console.log(response.statusCode, "status code");
 
-    console.log(response.statusCode, "status code");
-
-    if (error) {
-      callback("ERROR ERROR!", null);
-      return;
-    } else if (response.statusCode !== 200) {
+    if (response.statusCode !== 200) {
       const msg = `Status Code ${response.statusCode} when fetching IP. Response: ${body}`;
       callback(Error(msg), null);
       return;
@@ -20,4 +16,23 @@ const fetchMyIP = function(callback) {
   });
 };
 
-module.exports = { fetchMyIP };
+const fetchCoordsByIP = function(ip, callback) {
+  const api = `https://ipvigilante.com/${ip}`;
+
+  request(api, (error, response, body) => {
+    const data = JSON.parse(body).data;
+    // console.log(data)
+
+    // console.log(response.statusCode, "status code");
+    // console.log(data.latitude, 'lats  ')
+    // if (error) {
+    //   callback("ERROR ERROR!", null);
+    //   return;
+    if (response.statusCode !== 200) {
+      callback("Error", null);
+      return;
+    } else callback(null, `${data.latitude}`, `${data.longitude}`);
+  });
+};
+
+module.exports = { fetchMyIP, fetchCoordsByIP };
