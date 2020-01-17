@@ -22,31 +22,31 @@ const nextISSTimesForMyLocation = function(callback) {
           console.log("It didn't work!", error);
           return;
         } else {
+
+          for (const pass of flyTime) {
+            const datetime = new Date(0);
+            datetime.setUTCSeconds(pass.risetime);  //chg risetime to ${datetime}
+            const duration = pass.duration;
+            console.log(`Next pass: ${datetime} for ${duration} seconds!`);
+          }
+
           // console.log(flyTiclme);
-          callback(null, flyTime)
+          // callback(null, flyTime)
         }
       });
     });
   });
 };
 
-nextISSTimesForMyLocation((error, passTimes) => {
-  if (error) {
-    return console.log("It didn't work!", error);
-  }
-  // success, print out the deets!
-  printTime(passTimes);
-}
+nextISSTimesForMyLocation();
 
-);
+// const printTime = function(passTimes) {
+//   // console.log(passTimes, ' pass time')
 
-const printTime = function(passTimes) {
-  // console.log(passTimes, ' pass time')
-
-  for (const pass of passTimes) {
-    const datetime = new Date(0);
-    datetime.setUTCSeconds(pass.risetime);  //chg risetime to ${datetime}
-    const duration = pass.duration;
-    console.log(`Next pass: ${datetime} for ${duration} seconds!`);
-  }
-};
+//   for (const pass of passTimes) {
+//     const datetime = new Date(0);
+//     datetime.setUTCSeconds(pass.risetime);  //chg risetime to ${datetime}
+//     const duration = pass.duration;
+//     console.log(`Next pass: ${datetime} for ${duration} seconds!`);
+//   }
+// };

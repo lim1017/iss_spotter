@@ -47,8 +47,11 @@ const fetchISSFlyOverTimes = function(lat, long, callback) {
     if (response.statusCode !== 200) {
       callback("Error", null);
       return;
-    } else callback(null, JSON.parse(body).response);
+    } else callback(null, data.response);
   });
 };
+
+
+
 
 module.exports = { fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes };
