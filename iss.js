@@ -51,7 +51,4 @@ const fetchISSFlyOverTimes = function(lat, long, callback) {
   });
 };
 
-
-
-
 module.exports = { fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes };
